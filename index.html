@@ -29,16 +29,76 @@
     />
     <style>
       :root {
-        color-scheme: dark;
+        color-scheme: light;
         box-sizing: border-box;
-        --dk: #3a0912;
-        --mar: #5a0d1d;
-        --mar2: #7c1a2b;
+        --dk: #4a0a18;
         --g1: #f6d68a;
         --g2: #e3b04b;
         --g3: #b8862e;
-        --iv: #fff1d6;
-        --teal: #0f6b5c;
+        --bgc: radial-gradient(
+          120% 80% at 50% 22%,
+          #fffdf5,
+          #fbebcb 58%,
+          #efd39a
+        );
+        --bgd: #e9d2a0;
+        --tx: #4a0a18;
+        --ac: #8a1d30;
+        --gt: linear-gradient(
+          100deg,
+          #6b3e0a,
+          #a8741a 30%,
+          #d9a93a 48%,
+          #8a5a12 62%,
+          #6b3e0a
+        );
+        --pn: rgba(255, 250, 238, 0.9);
+        --ln: #fff8ea;
+        --dA: #fcefd0;
+        --dB: #f3d9a2;
+        --h1: rgba(138, 29, 48, 0.1);
+        --h2: rgba(138, 29, 48, 0.14);
+        --h3: rgba(15, 107, 92, 0.16);
+        --ray: rgba(184, 134, 46, 0.13);
+        --cp: #7c1a2b;
+        --cp2: #a33047;
+        --lo: 0.85;
+        --sh: rgba(90, 50, 20, 0.4);
+      }
+      html[data-theme="dark"] {
+        color-scheme: dark;
+        --dk: #3a0912;
+        --bgc: radial-gradient(
+          120% 80% at 50% 25%,
+          #8a1d30,
+          #5a0d1d 55%,
+          #33070f
+        );
+        --bgd: #2a060e;
+        --tx: #fff1d6;
+        --ac: #f6d68a;
+        --gt: linear-gradient(
+          100deg,
+          #b8862e,
+          #f6d68a 30%,
+          #fff3c4 48%,
+          #e3b04b 62%,
+          #b8862e
+        );
+        --pn: rgba(58, 9, 18, 0.74);
+        --ln: #3a0912;
+        --dA: #6a1022;
+        --dB: #8a1d30;
+        --h1: rgba(20, 2, 8, 0.35);
+        --h2: rgba(20, 2, 8, 0.42);
+        --h3: rgba(15, 107, 92, 0.32);
+        --ray: rgba(246, 214, 138, 0.1);
+        --cp: #2b0710;
+        --cp2: #4a0f1f;
+        --lo: 0.55;
+        --sh: rgba(0, 0, 0, 0.55);
+      }
+      :root {
         --cd: "Cinzel Decorative", "Cinzel", Georgia, serif;
         --cz: "Cinzel", Georgia, serif;
         --cg: "Cormorant Garamond", Georgia, serif;
@@ -54,8 +114,8 @@
         margin: 0;
         height: 100%;
         overflow: hidden;
-        background: #2a060e;
-        color: var(--iv);
+        background: var(--bgd);
+        color: var(--tx);
         font: 600 1.15rem/1.5 var(--cg);
         -webkit-tap-highlight-color: transparent;
       }
@@ -80,13 +140,8 @@
         width: min(100vw, 480px);
         transform: translateX(-50%);
         overflow: hidden;
-        background: radial-gradient(
-          120% 80% at 50% 25%,
-          #8a1d30,
-          #5a0d1d 55%,
-          #33070f
-        );
-        box-shadow: 0 0 70px rgba(0, 0, 0, 0.6);
+        background: var(--bgc);
+        box-shadow: 0 0 70px rgba(60, 30, 10, 0.45);
       }
       .rays {
         position: absolute;
@@ -98,7 +153,7 @@
         pointer-events: none;
         background: repeating-conic-gradient(
           from 0deg at 50% 30%,
-          rgba(246, 214, 138, 0.1) 0 5deg,
+          var(--ray) 0 5deg,
           transparent 5deg 16deg
         );
         -webkit-mask: radial-gradient(circle at 50% 30%, #000, transparent 55%);
@@ -115,7 +170,7 @@
         inset: 0;
         z-index: 0;
         pointer-events: none;
-        opacity: 0.55;
+        opacity: var(--lo);
         background: var(--lat) center/60px 60px;
       }
       #hills {
@@ -134,9 +189,9 @@
         border: 2px solid var(--g2);
         border-radius: 14px;
         box-shadow:
-          inset 0 0 0 5px var(--dk),
+          inset 0 0 0 5px var(--ln),
           inset 0 0 0 6px var(--g3),
-          0 0 24px rgba(0, 0, 0, 0.5);
+          0 0 24px var(--sh);
       }
       .bd {
         position: absolute;
@@ -178,14 +233,7 @@
         right: 5px;
       }
       .gt {
-        background: linear-gradient(
-          100deg,
-          #b8862e,
-          #f6d68a 30%,
-          #fff3c4 48%,
-          #e3b04b 62%,
-          #b8862e
-        );
+        background: var(--gt);
         background-size: 260% 100%;
         -webkit-background-clip: text;
         background-clip: text;
@@ -253,9 +301,17 @@
       }
       .lab {
         font: 700 0.78rem var(--cz);
-        letter-spacing: 0.28em;
+        letter-spacing: 0.24em;
         text-transform: uppercase;
-        color: var(--g1);
+        color: var(--ac);
+      }
+      .gn {
+        font: 900 clamp(1.25rem, 6vw, 1.75rem)/1.25 var(--cd);
+        margin: 0.3rem 0 0.2rem;
+      }
+      .top {
+        justify-content: flex-start;
+        padding-top: 13svh;
       }
       .big {
         font: 900 clamp(1.7rem, 7.5vw, 2.2rem)/1.15 var(--cd);
@@ -266,20 +322,18 @@
       }
       .am {
         font: italic 600 1.7rem var(--cg);
-        color: var(--g1);
+        color: var(--ac);
         margin: 0.1rem 0;
       }
       .txt {
         font: 600 1.22rem/1.5 var(--cg);
-        color: var(--iv);
+        color: var(--tx);
         max-width: 300px;
         margin: 0.9rem 0 1.1rem;
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
       }
       .sn {
         font: 700 1.5rem var(--si);
-        color: var(--g1);
-        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+        color: var(--ac);
       }
       .pill {
         display: inline-flex;
@@ -301,8 +355,8 @@
           inset 0 1px 0 rgba(255, 255, 255, 0.6);
       }
       .pill.o {
-        background: rgba(58, 9, 18, 0.7);
-        color: var(--g1);
+        background: var(--pn);
+        color: var(--ac);
         border: 1.5px solid var(--g2);
       }
       .pill:hover,
@@ -349,19 +403,19 @@
       }
       .fm i {
         height: 52px;
-        background: var(--g2);
+        background: var(--g3);
       }
       .fm b {
         display: block;
         font: 700 0.92rem var(--cz);
         letter-spacing: 0.07em;
         text-transform: uppercase;
-        color: var(--g1);
+        color: var(--ac);
       }
       .fm span {
         font: 600 0.78rem var(--cz);
         letter-spacing: 0.3em;
-        color: var(--iv);
+        color: var(--tx);
         text-transform: uppercase;
       }
       .mn {
@@ -396,16 +450,25 @@
       }
       .mc .d {
         font: 900 clamp(2.8rem, 10svh, 3.7rem)/1 var(--cd);
+        background-image: linear-gradient(
+          100deg,
+          #b8862e,
+          #f6d68a 30%,
+          #fff3c4 48%,
+          #e3b04b 62%,
+          #b8862e
+        );
+        filter: none;
       }
       .mc .mo {
         font: 700 0.7rem var(--cz);
         letter-spacing: 0.2em;
-        color: var(--iv);
+        color: #fff1d6;
       }
       .mc .y {
         font: 700 0.85rem var(--cz);
         letter-spacing: 0.25em;
-        color: var(--g1);
+        color: #f6d68a;
       }
       .mf {
         width: min(70vw, 29svh * 1.2);
@@ -414,11 +477,11 @@
         border-radius: 999px 999px 12px 12px;
         border: 3px solid var(--g2);
         padding: 6px;
-        background: var(--dk);
+        background: var(--ln);
         box-shadow:
-          0 0 0 3px var(--dk),
+          0 0 0 3px var(--ln),
           0 0 0 4px var(--g3),
-          0 10px 26px rgba(0, 0, 0, 0.6);
+          0 10px 26px var(--sh);
       }
       .mf iframe {
         display: block;
@@ -431,13 +494,12 @@
       .vn {
         margin: 0.1rem 0 0.8rem;
         line-height: 1.3;
-        color: var(--iv);
-        text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+        color: var(--tx);
       }
       .vn b {
         font: 700 1.05rem var(--cz);
         letter-spacing: 0.1em;
-        color: var(--g1);
+        color: var(--ac);
         text-transform: uppercase;
       }
       .cdn {
@@ -446,7 +508,7 @@
       .cdl {
         font: 700 0.8rem var(--cz);
         letter-spacing: 0.4em;
-        color: var(--iv);
+        color: var(--tx);
       }
       .cdr {
         display: flex;
@@ -459,18 +521,18 @@
         padding: 0.6rem 0.4rem 0.5rem;
         border: 1.5px solid var(--g2);
         border-radius: 40px 40px 6px 6px;
-        background: rgba(58, 9, 18, 0.65);
+        background: var(--pn);
       }
       .tile b {
         display: block;
         font: 900 1.7rem/1 var(--cd);
-        color: var(--g1);
+        color: var(--ac);
       }
       .tile span {
         font: 700 0.62rem var(--cz);
         letter-spacing: 0.22em;
         text-transform: uppercase;
-        color: var(--iv);
+        color: var(--tx);
       }
       .lp {
         width: 46px;
@@ -532,10 +594,10 @@
         cursor: pointer;
         display: grid;
         place-items: center;
-        color: var(--g1);
-        background: rgba(58, 9, 18, 0.85);
+        color: var(--ac);
+        background: var(--pn);
         border: 1.5px solid var(--g2);
-        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 3px 10px var(--sh);
         font: 1.15rem var(--cg);
       }
       #mus {
@@ -659,7 +721,7 @@
         bottom: 0;
         width: 50.4%;
         overflow: hidden;
-        background: linear-gradient(90deg, #6a1022, #8a1d30);
+        background: linear-gradient(90deg, var(--dA), var(--dB));
         transition: transform 1.8s cubic-bezier(0.7, 0, 0.2, 1);
       }
       .dr:before {
@@ -675,47 +737,103 @@
         inset: 22px 14px;
         border: 2px solid var(--g2);
         box-shadow:
-          inset 0 0 0 5px #5a0d1d,
+          inset 0 0 0 5px var(--ln),
           inset 0 0 0 6px var(--g3);
       }
       .d1 {
         left: 0;
-        box-shadow: 8px 0 20px rgba(0, 0, 0, 0.55);
+        box-shadow: 8px 0 20px var(--sh);
       }
       .d2 {
         right: 0;
-        box-shadow: -8px 0 20px rgba(0, 0, 0, 0.55);
+        box-shadow: -8px 0 20px var(--sh);
       }
-      .dr .lotus {
+      .cpa {
+        position: relative;
+        display: block;
+        aspect-ratio: 3/4;
+      }
+      .cpa i {
         position: absolute;
-        top: 50%;
-        width: 270px;
-        margin: 0;
-        transform: translateY(-62%);
+        inset: 0;
+        border-radius: 999px 999px 14px 14px;
+        background: radial-gradient(
+          circle at 50% 38%,
+          #ffe9b0,
+          #f2b955 58%,
+          #d98a2b
+        );
+        border: 3px solid var(--g3);
+        box-shadow:
+          inset 0 0 0 3px #fff3c4,
+          0 0 0 3px var(--ln),
+          0 0 0 4px var(--g3),
+          0 10px 24px var(--sh);
+      }
+      .cpa img {
+        position: absolute;
+        left: 50%;
+        bottom: 3%;
+        height: 84%;
+        width: auto;
+        transform: translateX(-50%);
+        filter: drop-shadow(0 4px 6px rgba(70, 30, 10, 0.3));
+      }
+      .dr .cpa {
+        position: absolute;
+        bottom: 25%;
+        height: 48%;
         z-index: 1;
-        opacity: 0.8;
       }
-      .d1 .lotus {
-        right: -135px;
+      .d1 .cpa {
+        left: 100%;
+        transform: translateX(-50%);
       }
-      .d2 .lotus {
-        left: -135px;
+      .d2 .cpa {
+        left: 0;
+        transform: translateX(-50%);
       }
-      .dr .lotus .pt {
-        transform: none;
-      }
-      .dr .lp {
+      .dr .ph {
         position: absolute;
-        bottom: 9%;
-        z-index: 2;
-        width: 56px;
-        height: 112px;
+        top: 0;
+        bottom: 0;
+        width: 198.4%;
+        z-index: 0;
+        background: var(--pu) var(--pp, center 30%) / cover no-repeat;
       }
-      .d1 .lp {
-        right: 12%;
+      .d1 .ph {
+        left: 0;
       }
-      .d2 .lp {
-        left: 12%;
+      .d2 .ph {
+        right: 0;
+      }
+      .dr .ph:after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          rgba(252, 239, 208, 0.3),
+          rgba(252, 239, 208, 0.04) 40%,
+          rgba(252, 239, 208, 0.4)
+        );
+      }
+      #cp {
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        bottom: 11svh;
+        height: var(--ch, 50svh);
+        aspect-ratio: 3/4;
+        transform: translateX(-50%);
+        opacity: var(--co, 0.1);
+        transition:
+          opacity 1.2s,
+          height 1.2s;
+        pointer-events: none;
+      }
+      #cp .cpa {
+        width: 100%;
+        height: 100%;
       }
       #cover.open .d1 {
         transform: translateX(-101%);
@@ -726,7 +844,7 @@
       .sl {
         position: absolute;
         left: 50%;
-        top: 48%;
+        top: 74%;
         width: 104px;
         height: 104px;
         margin: -52px 0 0 -52px;
@@ -735,7 +853,7 @@
         place-items: center;
         cursor: pointer;
         border: 0;
-        color: var(--g1);
+        color: #f6d68a;
         background: conic-gradient(
           from 0deg,
           #b8862e,
@@ -784,10 +902,26 @@
         opacity: 0;
       }
       .ch.t {
-        top: 15%;
+        top: 11%;
+      }
+      .ch.b .lab {
+        display: block;
+        max-width: 84%;
+        margin: 0 auto;
+        letter-spacing: 0.12em;
+        line-height: 1.4;
       }
       .ch.b {
-        top: calc(48% + 74px);
+        top: calc(74% + 68px);
+      }
+      .ch.b > div {
+        display: inline-block;
+        max-width: 86%;
+        padding: 0.5rem 1.2rem 0.6rem;
+        border-radius: 18px;
+        background: var(--pn);
+        border: 1.5px solid var(--g2);
+        box-shadow: 0 4px 14px var(--sh);
       }
       a:focus-visible,
       button:focus-visible {
@@ -821,6 +955,7 @@
     <div id="app">
       <div class="rays"></div>
       <div class="lat"></div>
+      <div id="cp"></div>
       <svg
         id="hills"
         viewBox="0 0 480 140"
@@ -869,16 +1004,12 @@
           <span>K&amp;I</span>
         </button>
         <div class="ch b">
-          <p class="lab" id="to"></p>
-          <p
-            style="
-              font: italic 600 1.3rem var(--cg);
-              color: var(--g1);
-              margin-top: 0.2rem;
-            "
-          >
-            Tap to open
-          </p>
+          <div>
+            <p class="lab" id="to"></p>
+            <p style="font: italic 600 1.3rem var(--cg); color: var(--ac)">
+              Tap to open
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -907,6 +1038,7 @@
         musicUrl:
           "music.mp3" /* ← MUSIC TRACK: save your mp3 as music.mp3 next to index.html (or change this path) */,
         musicVolume: 0.6,
+        theme: "light" /* "light" (ivory & gold) or "dark" (maroon & gold) */,
         pageSeconds: 7 /* auto-play: seconds per screen */,
         sinhala: true /* small Sinhala greeting on cover & ending; set false for English only */,
         whatsapp: "" /* e.g. 94771234567 → adds Confirm attendance */,
@@ -924,10 +1056,15 @@
                 "'": "&#39;",
               })[m],
           );
-      const guest = (new URLSearchParams(location.search).get("to") || "")
-        .replace(/[^\p{L}\p{M}\s.'&-]/gu, "")
-        .trim()
-        .slice(0, 40);
+      /* guest name: ?to=Mr._Thushan_Karunathilaka (underscores, + or %20 all become spaces; use links.html to generate links) */
+      const Q = new URLSearchParams(location.search),
+        guest = (Q.get("to") || Q.get("name") || Q.get("guest") || "")
+          .replace(/[_+]/g, " ")
+          .replace(/[^\p{L}\p{M}\s.'&-]/gu, "")
+          .replace(/\s+/g, " ")
+          .trim()
+          .slice(0, 60);
+      document.documentElement.dataset.theme = W.theme;
       const dt = new Date(W.iso),
         RM = matchMedia("(prefers-reduced-motion:reduce)").matches,
         gf = W.groom.name.split(" ")[0],
@@ -975,6 +1112,64 @@
           s += `<path d="M0 -17Q5 -10 0 -4Q-5 -10 0 -17Z" transform="rotate(${i * 45})" fill="url(#gg)"/>`;
         return s + '<circle r="3.2" fill="#F6D68A"/></svg>';
       };
+      function couple() {
+        const o = (d, c) => `<path class="${c}" d="${d}"/>`,
+          l = (d) => `<path class="gl_" d="${d}"/>`;
+        return (
+          '<svg class="cpl" viewBox="0 0 320 560" aria-hidden="true">' +
+          /* groom: Kandyan cap, epaulettes, jacket, cloth */
+          o(
+            "M97 46Q97 28 110 24Q123 28 123 46ZM88 62Q88 44 110 44Q132 44 132 62ZM80 80Q80 62 110 62Q140 62 140 80Z",
+            "b1",
+          ) +
+          l("M110 8v16M88 62H132M80 80H140M97 46H123") +
+          `<circle class="gl_" cx="110" cy="7" r="3"/>` +
+          o(
+            "M110 96m-17 0a17 20 0 1 0 34 0a17 20 0 1 0-34 0M102 112h16v16h-16z",
+            "b1",
+          ) +
+          o(
+            "M48 146Q60 124 100 126L120 126Q160 124 172 146Q166 158 152 156L68 156Q54 158 48 146Z",
+            "b1",
+          ) +
+          l(
+            "M60 146q4-8 12-10M80 138q8-6 16-6M124 132q8 0 16 6M148 136q8 2 12 10",
+          ) +
+          o("M72 154L148 154L142 252L78 252Z", "b1") +
+          l("M110 168v52M100 184h20M104 200h12") +
+          `<circle class="gl_" cx="110" cy="178" r="8"/>` +
+          o(
+            "M70 156Q54 206 62 268L76 270Q82 210 84 160ZM148 156Q172 200 162 262L172 266Q186 205 156 156Z",
+            "b1",
+          ) +
+          o("M74 246H146V258H74ZM76 258L144 258L168 556L52 556Z", "b1") +
+          l("M92 258L84 556M110 258V556M128 258L136 556M100 258h20v140h-20z") +
+          /* bride: bun, tiara, blouse, osariya */
+          o(
+            "M214 48m-15 0a15 15 0 1 0 30 0a15 15 0 1 0-30 0M214 86m-15 0a15 19 0 1 0 30 0a15 19 0 1 0-30 0M207 104h14v14h-14z",
+            "b2",
+          ) +
+          l("M198 70Q214 54 230 70") +
+          `<circle class="gl_" cx="200" cy="44" r="3"/><circle class="gl_" cx="228" cy="44" r="3"/><circle class="gl_" cx="214" cy="31" r="3"/>` +
+          o("M178 136Q214 122 250 136L246 162L182 162Z", "b2") +
+          l("M200 124Q214 146 228 124M194 130Q214 164 234 130") +
+          o(
+            "M186 160L242 160L236 238L192 238ZM246 138L196 236L210 244L254 162Z",
+            "b2",
+          ) +
+          l("M236 150L204 238") +
+          o(
+            "M184 162Q164 210 166 262L176 268Q184 210 194 166ZM244 162Q262 210 258 268L248 268Q250 212 238 166Z",
+            "b2",
+          ) +
+          `<circle class="b1" cx="168" cy="268" r="7"/>` +
+          o("M190 238L238 238L282 556L150 556Z", "b2") +
+          l(
+            "M214 246L170 556M214 246L192 556M214 246V556M214 246L236 556M214 246L258 556M200 240Q214 262 228 240",
+          ) +
+          "</svg>"
+        );
+      }
       function moon() {
         const pe = (n, r0, r1, w) =>
           Array.from(
@@ -989,11 +1184,14 @@
       }
       /* hills */
       $("#hills").innerHTML =
-        '<path d="M0 140V70Q60 40 120 66T240 50T360 70T480 44V140z" fill="rgba(20,2,8,.35)"/><path d="M0 140V95Q80 70 160 92T320 80T480 90V140z" fill="rgba(20,2,8,.42)"/><path d="M0 140V118Q100 100 200 116T400 108T480 114V140z" fill="rgba(15,107,92,.32)"/>';
+        '<path d="M0 140V70Q60 40 120 66T240 50T360 70T480 44V140z" fill="var(--h1)"/><path d="M0 140V95Q80 70 160 92T320 80T480 90V140z" fill="var(--h2)"/><path d="M0 140V118Q100 100 200 116T400 108T480 114V140z" fill="var(--h3)"/>';
       $("#ros").innerHTML = ["a", "b", "c", "d"]
         .map((c) => `<div class="ro ${c}">${rosette()}</div>`)
         .join("");
-      ["#d1", "#d2"].forEach((i) => ($(i).innerHTML = lotus() + lamp("lp")));
+      const cpa = () =>
+        '<div class="cpa"><i></i><img src="couple.png" alt=""></div>';
+      ["#d1", "#d2"].forEach((i) => ($(i).innerHTML = cpa()));
+      $("#cp").innerHTML = cpa();
       if (!W.sinhala) $("#si1").hidden = true;
       /* ===== pages ===== */
       const cal =
@@ -1010,21 +1208,23 @@
       const orn =
         '<svg class="orn" viewBox="0 0 120 14" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M0 7h46M74 7h46"/><path d="M60 1l6 6-6 6-6-6z" fill="currentColor"/><circle cx="48" cy="7" r="1.6" fill="currentColor"/><circle cx="72" cy="7" r="1.6" fill="currentColor"/></svg>';
       const P = [
-        `<p class="lab a">Together with their families</p><div class="a" style="--d:.2s">${lotus()}</div><h1 class="nm gt a" style="--d:.5s">${gf}</h1><p class="am a" style="--d:.8s">&amp;</p><h1 class="nm gt a" style="--d:1s">${bf}</h1><div class="a" style="--d:1.3s">${orn}</div>`,
+        `<p class="lab a">Together with their families</p><div class="a" style="--d:.2s;width:min(34vw,14svh*1.25)">${lotus()}</div><h1 class="nm gt a" style="--d:.5s">${gf}</h1><p class="am a" style="--d:.8s">&amp;</p><h1 class="nm gt a" style="--d:1s">${bf}</h1><div class="a" style="--d:1.3s">${orn}</div>`,
         `<p class="big gt a">${gf} &amp; ${bf}</p><p class="txt a" style="--d:.4s">${esc(W.groom.name)}, son of ${W.groom.parents}, and ${esc(W.bride.name)}, daughter of ${W.bride.parents}, joyfully invite you to celebrate the beginning of their forever.</p>
 <p class="lab a" style="--d:.8s">With the blessings of</p><div class="fm a" style="--d:1s"><div><b>${W.groom.family}</b><span>Family</span></div><i></i><div><b>${W.bride.family}</b><span>Family</span></div></div>`,
         `<p class="lab a">Save the date</p><div class="mn a" style="--d:.3s">${moon()}<div class="mc"><span class="d gt">26</span><span class="mo">NOVEMBER</span><span class="y">2026</span></div></div>
-<div class="row a" style="--d:.9s"><span class="pill o">Thursday</span><span class="pill o">${W.timeShort}</span></div><p style="font:italic 600 1.3rem var(--cg);color:var(--g1);margin-top:.5rem" class="a">onwards</p>`,
+<div class="row a" style="--d:.9s"><span class="pill o">Thursday</span><span class="pill o">${W.timeShort}</span></div><p style="font:italic 600 1.3rem var(--cg);color:var(--ac);margin-top:.5rem" class="a">onwards</p>`,
         `<p class="big gt a">Location</p><div class="mf a" style="--d:.3s"><iframe title="Map to ${esc(W.venue.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=${mq}&output=embed"></iframe></div>
-<p class="vn a" style="--d:.7s"><b>${W.venue.name}</b><br>${W.venue.place}</p><div class="a" style="--d:.9s"><a class="pill" href="${dr}" target="_blank" rel="noopener"><svg width="14" height="16" viewBox="0 0 14 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 15C3 10 2 8 2 6a5 5 0 0110 0c0 2-1 4-5 9z"/><circle cx="7" cy="6" r="1.8"/></svg>Get directions</a></div><p class="a" style="--d:1.1s;margin-top:.5rem"><a href="${mp}" target="_blank" rel="noopener" style="color:var(--g1);font-size:.95rem">Open in Maps</a></p>`,
+<p class="vn a" style="--d:.7s"><b>${W.venue.name}</b><br>${W.venue.place}</p><div class="a" style="--d:.9s"><a class="pill" href="${dr}" target="_blank" rel="noopener"><svg width="14" height="16" viewBox="0 0 14 16" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 15C3 10 2 8 2 6a5 5 0 0110 0c0 2-1 4-5 9z"/><circle cx="7" cy="6" r="1.8"/></svg>Get directions</a></div><p class="a" style="--d:1.1s;margin-top:.5rem"><a href="${mp}" target="_blank" rel="noopener" style="color:var(--ac);font-size:.95rem">Open in Maps</a></p>`,
         `<p class="lab a">Until we celebrate</p><div class="a" style="--d:.2s">${orn}</div><div class="a" style="--d:.4s;margin-top:.8rem"><div class="cdn gt" id="cd0">00</div><span class="cdl">DAYS</span></div>
 <div class="cdr a" id="cdr" style="--d:.8s"><div class="tile"><b>00</b><span>Hours</span></div><div class="tile"><b>00</b><span>Min</span></div><div class="tile"><b>00</b><span>Sec</span></div></div><p class="txt a" style="--d:1.3s;margin-top:1.4rem;font-style:italic">Two hearts, one beautiful beginning.</p>`,
-        `<div class="a" style="display:flex;align-items:flex-end;justify-content:center;gap:.4rem;width:100%">${lamp("lp")}${lotus()}${lamp("lp")}</div>
-<p class="big gt a" style="--d:.4s;margin-top:.8rem">Thank you${guest ? `, ${esc(guest)}` : ""}</p>${W.sinhala ? `<p class="sn a" style="--d:.6s"></p>` : ""}<p class="txt a" style="--d:.8s;margin-top:.4rem">We can't wait to celebrate with you on 26 November 2026.</p>
-<div class="row a" style="--d:1.1s"><a class="pill" href="${cal}" target="_blank" rel="noopener">Add to calendar</a>${W.whatsapp ? `<a class="pill o" href="https://wa.me/${esc(W.whatsapp)}?text=${encodeURIComponent("Hi, this is " + (guest || "a guest") + ". I will be attending the wedding.")}" target="_blank" rel="noopener">Confirm attendance</a>` : ""}</div>`,
+        `${guest ? `<p class="lab a">Dear</p><p class="gn gt a" style="--d:.2s">${esc(guest)}</p>` : ""}<div class="a" style="--d:.5s">${orn}</div><p class="txt a" style="--d:.8s;font-size:1.45rem;font-style:italic;max-width:310px;margin-top:1rem">Your presence will make our special day even more meaningful.</p>
+<p class="lab a" style="--d:1.1s;margin-bottom:1rem">26 November 2026 · ${W.venue.name}</p>
+<div class="row a" style="--d:1.3s"><a class="pill" href="${cal}" target="_blank" rel="noopener">Add to calendar</a>${W.whatsapp ? `<a class="pill o" href="https://wa.me/${esc(W.whatsapp)}?text=${encodeURIComponent("Hi, this is " + (guest || "a guest") + ". I will be attending the wedding.")}" target="_blank" rel="noopener">Confirm attendance</a>` : ""}</div>`,
       ];
+      const OP = [[1, ".95", "37svh"], [0], [0], [0], [0], [1, ".95", "35svh"]];
       $("#pgs").innerHTML = P.map(
-        (h) => `<section class="pg">${h}</section>`,
+        (h, i) =>
+          `<section class="pg${OP[i][0] ? " top" : ""}" data-co="${OP[i][1] || ""}" data-ch="${OP[i][2] || ""}">${h}</section>`,
       ).join("");
       const pg = [...document.querySelectorAll(".pg")],
         last = pg.length - 1;
@@ -1050,6 +1250,8 @@
         fl.classList.add("go");
         cur = i;
         pg[i].classList.add("on");
+        $("#cp").style.setProperty("--co", pg[i].dataset.co || ".10");
+        $("#cp").style.setProperty("--ch", pg[i].dataset.ch || "50svh");
         $("#nxl").textContent = i === last ? "Start again" : "Scroll down";
         sched();
       }
@@ -1169,7 +1371,11 @@
       /* ===== jasmine petals + gold sparkles ===== */
       const cv = $("#bg"),
         cx = cv.getContext("2d"),
-        PC = ["#FFF6E2", "#FFE9B0", "#F6D68A", "#FFFFFF"];
+        PC =
+          W.theme === "dark"
+            ? ["#FFF6E2", "#FFE9B0", "#F6D68A", "#FFFFFF"]
+            : ["#C9486A", "#E3B04B", "#E98A15", "#A8243D"],
+        SC = W.theme === "dark" ? "#FFE9A8" : "#B8862E";
       let CW,
         CH,
         D,
@@ -1213,7 +1419,7 @@
           const a = 0.25 + 0.75 * Math.abs(Math.sin(t * 1.3 + s.p)),
             r = s.s * 2.6 * D;
           cx.globalAlpha = a;
-          cx.fillStyle = "#FFE9A8";
+          cx.fillStyle = SC;
           cx.fillRect(s.x - r, s.y - 0.6 * D, r * 2, 1.2 * D);
           cx.fillRect(s.x - 0.6 * D, s.y - r, 1.2 * D, r * 2);
         });
